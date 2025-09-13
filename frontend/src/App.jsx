@@ -5,10 +5,10 @@ import './styles/App.css'
 function App() {
   return (
     <>
-      <div>
-
+      <div className='side-window'>
+        <div>TExt</div>
       </div>
-      <div>
+      <div className='main-window'> 
         <div className="card">
           <h1>Vite + React</h1>
           <button>
