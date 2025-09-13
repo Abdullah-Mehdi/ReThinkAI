@@ -1,10 +1,27 @@
 import { useState } from 'react'
+import axios from 'axios';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get('/api');
+      setData(response.data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -18,16 +35,17 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={fetchData} disabled={loading}>
+          {loading ? 'Loading...' : 'Fetch Data'}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        {error && <p className="error">Error: {error.message}</p>}
+        {data && (
+          <div className="data">
+            <h2>Data from Backend:</h2>
+            <pre>{JSON.stringify(data, null, 2)}</pre>
+          </div>
+        )}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
