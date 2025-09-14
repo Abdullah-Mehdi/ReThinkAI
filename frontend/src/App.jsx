@@ -345,13 +345,13 @@ export default function OpenAIHome() {
       )}
       {/* LEFT COLUMN */}
       <div className="left-col">
-        <div className="logo">OpenAI</div>
+        <div className="logo">ReThinkAI</div>
         <div className="left-text"> 
           <p className="tagline">Research</p>
           <p className="tagline">Safety</p>
           <p className="tagline">For People</p>
           <p className="tagline">For You</p>
-          <p className="tagline">ChatGPT</p>
+          <p className="tagline">ReThinkAI</p>
           <p className="tagline">Data Centers</p>
           <p className="tagline">Stories</p>
           <p className="tagline">Company</p>
