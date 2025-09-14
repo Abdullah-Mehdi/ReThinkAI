@@ -94,25 +94,29 @@ export default function OpenAIHome() {
   };
 
   const handleNextQuestion = (answer) => {
-    // Store the current answer
+    const currentQ = questions[currentQuestion];
+    const wasPreviouslyCorrect = answers[currentQuestion] === currentQ.correctAnswer;
+    const isNowCorrect = answer === currentQ.correctAnswer;
+
     setAnswers(prev => ({
       ...prev,
       [currentQuestion]: answer
     }));
 
-    const currentQ = questions[currentQuestion];
-    // Update score if answer is correct
-    if (answer === currentQ.correctAnswer) {
-      setScore(prev => prev + 1);
-    }
+    setScore(prev => {
+      // If it was correct before and still correct -> no change
+      if (wasPreviouslyCorrect && isNowCorrect) return prev;
+      // If it was correct before but now wrong -> subtract 1
+      if (wasPreviouslyCorrect && !isNowCorrect) return prev - 1;
+      // If it was wrong before and now correct -> add 1
+      if (!wasPreviouslyCorrect && isNowCorrect) return prev + 1;
+      // Otherwise no change
+      return prev;
+    });
 
-    // Move to next question or finish (FOR NOW - we will change the finish state later)
     if (currentQuestion < 7) {
       setCurrentQuestion(prev => prev + 1);
     } else {
-      // All questions completed
-      console.log('All answers:', { ...answers, [currentQuestion]: answer });
-      // alert('Survey completed! Check console for answers.');
       setCurrentPage('results');
     }
   };
@@ -191,18 +195,21 @@ export default function OpenAIHome() {
     return sum + (ans === 'placeholder' || ans === 'component-answer' ? 1 : 1);
   }, 0);
 
-  const percentageBetter = Math.floor((totalPoints / 7) * 100); // fake comparison %
+  // const percentageBetter = Math.floor((totalPoints / 7) * 100); // fake comparison %
+  const scorePercentMap = [5, 20, 35, 50, 65, 80, 90, 99];
+  const percentageBetter = scorePercentMap[score];
 
   return (
     <div className="results-page">
       <h1>You got {score}/7 points!</h1>
+      
       <p>That's better than {percentageBetter}% of other users!!!</p>
 
       {/* Simple bar chart with Y axis */}
       <div className="bar-chart-container">
         {/* Y axis labels */}
         <div className="y-axis">
-          {[60, 50, 40, 30, 20, 10, 0].map((percent) => (
+          {[50, 40, 30, 20, 10, 0].map((percent) => (
             <div key={percent} className="y-label">
               {percent}%
             </div>
@@ -288,7 +295,7 @@ export default function OpenAIHome() {
             Question {currentQuestion} of 7
           </div>
           <div className="score-display">
-            Score: {score} / {currentQuestion - 1}
+            Score: {score} /  {Object.keys(answers).length}
           </div>
           {currentQuestion > 1 && (
             <button className="prev-btn" onClick={handlePrevQuestion}>
