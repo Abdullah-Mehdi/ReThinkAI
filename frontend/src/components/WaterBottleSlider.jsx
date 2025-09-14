@@ -5,6 +5,11 @@ import '../styles/WaterBottle.css';
 const WaterBottleSlider = () => {
   const [selectedSize, setSelectedSize] = useState(8);
   
+  // User selection
+    const handleSubmit = () => {
+    onAnswer(selectedSize); 
+  };
+
   // Map bottle sizes to fill percentages
   const sizeToFillPercentage = {
     8: 25,   // 25% fill for 8oz
