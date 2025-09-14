@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Lottie from 'lottie-react'
 import './styles/App.css'
 import WaterBottleSlider from './components/WaterBottleSlider'
+import MultipleChoiceBlank from './components/MultipleChoiceBlank.jsx';
 
 import { FaArrowUp } from "react-icons/fa6";
 import { RiLoopLeftLine } from "react-icons/ri";
@@ -35,10 +36,11 @@ export default function OpenAIHome() {
       correctAnswer: 16 
     },
     3: {
-      type: 'placeholder',
-      text: 'Question 3 placeholder',
-      correctAnswer: 'placeholder',
-      component: null
+      type: 'multiple-choice-blank',
+      text: 'In 2023, they used _____ gallons of water for their data centers. Enough to water 41 golf courses annually.',
+      options: ['4 billion', '500 million', '6 billion', '700 million'],
+      correctAnswer: '6 billion', 
+      component: MultipleChoiceBlank
     },
     4: {
       type: 'placeholder',
@@ -316,6 +318,13 @@ export default function OpenAIHome() {
             <div className="component-question">
               <currentQ.component onAnswer={handleNextQuestion} />
             </div>
+          )}
+
+          {currentQ.type === 'multiple-choice-blank' && currentQ.component && (
+            <currentQ.component 
+              questionData={{...currentQ, isLast: currentQuestion === 7}}
+              onAnswer={handleNextQuestion}
+            />
           )}
 
           {currentQ.type === 'placeholder' && (
