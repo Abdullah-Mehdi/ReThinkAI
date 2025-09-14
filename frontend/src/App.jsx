@@ -258,6 +258,7 @@ export default function OpenAIHome() {
   if (currentPage === 'questions') {
     const currentQ = questions[currentQuestion];
     const imageOffset = -(currentQuestion - 1);
+    const scaleFactor = window.innerHeight / 1080;
     
     // RENDER QUESTIONS PAGE (depending on question type...)
     return (
@@ -265,7 +266,7 @@ export default function OpenAIHome() {
       <div className="back-img-container">
         <div 
           className="moving-elements-wrapper"
-          style={{ transform: `translateX(calc(${imageOffset} * 100vw))` }}
+          style={{ transform: `translateX(calc(${imageOffset} * (1920px * ${scaleFactor}) + (100vw - 1920px * ${scaleFactor}) / 2))` }}
         >
           <img
             className="back-img"
