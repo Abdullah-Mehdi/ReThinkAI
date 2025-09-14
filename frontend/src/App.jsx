@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Lottie from 'lottie-react'
 import './styles/App.css'
 import WaterBottleSlider from './components/WaterBottleSlider'
@@ -10,6 +10,7 @@ import { RiLoopLeftLine } from "react-icons/ri";
 import TypingBubble from './components/TypingBubble.jsx';
 import backImg from './assets/backdrop.svg'
 import backAnim from './assets/animatedElements.json'
+import explodeAnim from './assets/explode.json'
 
 export default function OpenAIHome() {
   const [isTyping, setIsTyping] = useState(false);
@@ -18,6 +19,18 @@ export default function OpenAIHome() {
   const [currentQuestion, setCurrentQuestion] = useState(1); // Track which question (1-7)
   const [answers, setAnswers] = useState({}); // Store all answers.. hehehe...
   const [score, setScore] = useState(0);
+  const [showExplosion, setShowExplosion] = useState(false);
+  const lottieRef = useRef();
+
+  useEffect(() => {
+    if (showExplosion && lottieRef.current) {
+      // Introduce a small delay to ensure the Lottie instance is fully ready
+      setTimeout(() => {
+        lottieRef.current.stop();
+        lottieRef.current.goToAndPlay(0);
+      }, 50); // 50ms delay
+    }
+  }, [showExplosion]);
 
   // Question data
   const questions = {
@@ -81,8 +94,10 @@ export default function OpenAIHome() {
       // After 3 seconds, hide typing bubble and navigate to questions
       setTimeout(() => {
         setIsTyping(false);
+        setShowExplosion(true);
         setCurrentPage('questions');
         setCurrentQuestion(1);
+
       }, 3000);
     }
   };
@@ -264,9 +279,19 @@ export default function OpenAIHome() {
   const imageOffset = -(currentQuestion - 1);
   const scaleFactor = window.innerHeight / 1080;
 
+
   // Show home page
   return (
     <div className="homepage">
+        {showExplosion && (
+        <Lottie 
+          lottieRef={lottieRef}
+          className='explode' 
+          loop={false} 
+          animationData={explodeAnim} 
+          autoplay={false}
+        />
+      )}
       {currentPage === 'questions' && (
         <div className="back-img-container">
           <div 

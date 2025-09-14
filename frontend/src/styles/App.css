@@ -583,3 +583,12 @@ html, body, .homepage {
   align-items: center;
   justify-items: center;
 }
+
+.explode {
+  z-index: 10;
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 100vh;
+  pointer-events: none;
+}
