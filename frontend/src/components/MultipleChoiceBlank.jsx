@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function MultipleChoiceBlank({ questionData, onAnswer }) {
   const [selected, setSelected] = useState(null);
 
-  const handleSelect = (option) => {
-    setSelected(option);
+  // Reset selected when question changes
+  useEffect(() => {
+    setSelected(null);
+  }, [questionData.text]);
+
+  const handleSelect = (optionIdx) => {
+    setSelected(optionIdx);
   };
 
   const handleSubmit = () => {
@@ -21,7 +26,9 @@ export default function MultipleChoiceBlank({ questionData, onAnswer }) {
       <div className="mc-blank-container">
         <div className="mc-question-text">
           {textParts[0]}
-          <span className="mc-blank">{selected !== null ? questionData.options[selected] : '_____'}</span>
+          <span className="mc-blank">
+            {selected !== null ? questionData.options[selected] : '_____'}
+          </span>
           {textParts[1]}
         </div>
         <div className="mc-options">
@@ -30,6 +37,7 @@ export default function MultipleChoiceBlank({ questionData, onAnswer }) {
               key={idx}
               className={`mc-option-btn${selected === idx ? ' selected' : ''}`}
               onClick={() => handleSelect(idx)}
+              type="button"
             >
               {opt}
             </button>

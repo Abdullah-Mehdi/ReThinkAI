@@ -43,16 +43,18 @@ export default function OpenAIHome() {
       component: MultipleChoiceBlank
     },
     4: {
-      type: 'placeholder',
-      text: 'Question 4 placeholder',
-      correctAnswer: 'placeholder',
-      component: null
+      type: 'multiple-choice-blank',
+      text: 'Making a 2 kg computer requires _____ the amount of raw materials.',
+      options: ['100 times', '400 times', '600 times', '10000 times'],
+      correctAnswer: '400 times',
+      component: MultipleChoiceBlank
     },
     5: {
-      type: 'placeholder',
-      text: 'Question 5 placeholder',
-      correctAnswer: 'placeholder',
-      component: null
+      type: 'multiple-choice-blank',
+      text: 'In AI datacenters, a GPU’s lifespan averages to _____ .',
+      options: ['2-5 years', '1-3 years', '2-10 years', '1-7 years'],
+      correctAnswer: '1-3 years',
+      component: MultipleChoiceBlank
     },
     6: {
       type: 'placeholder',
