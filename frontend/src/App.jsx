@@ -217,7 +217,7 @@ export default function OpenAIHome() {
   }, 0);
 
   // const percentageBetter = Math.floor((totalPoints / 7) * 100); // fake comparison %
-  const scorePercentMap = [5, 20, 35, 50, 65, 80, 90, 99];
+  const scorePercentMap = [0, 5, 9, 19, 38, 67, 83, 90];
   const percentageBetter = scorePercentMap[score];
 
   return (
@@ -266,6 +266,57 @@ export default function OpenAIHome() {
       <button className="next-btn" onClick={handleRetake}>Retake Quiz  <RiLoopLeftLine size={20} /></button>
     </div>
 
+    <div className="scroll-down-hint">
+      <p>Scroll down for more information</p>
+      <div className="down-arrow">↓</div>
+    </div>
+
+    <div className="results-blurbs">
+      <div className="blurb">
+        <div className="blurb-left">
+          <h2>The Hidden Cost of AI</h2>
+          <br></br>
+          <p>To most, generative AI is just words appearing on their screen. But behind every search are massive data centers, drawing electricity, water, and rare minerals. These systems release CO2, strain freshwater supplies, and drive resource extraction.</p>
+          <br></br>
+          <p>“The ease-of-use of generative AI interfaces and the lack of information about the environmental impacts of my actions means that, as a user, I don’t have much incentive to cut back on my use of generative AI,” - Noman Bashir, a Computing and Climate Impact Fellow at MIT Climate and Sustainability Consortium (MCSC). </p>
+        </div>
+        <div className="blurb-image">
+          <a href = "https://www.technologyreview.com/2025/04/10/1114912/why-the-climate-promises-of-ai-sound-a-lot-like-carbon-offsets/"><img src="datacenters.avif" alt="Amazon Data Center" /></a>
+          <span className="citation">Image: An aerial view of an Amazon data center in Northern Virginia, one of the largest data center markets in the world.</span>
+        </div>
+      </div>
+
+      <div className="blurb">
+        <div className="blurb-image">
+          <a href = "https://www.nbcnews.com/tech/internet/drought-stricken-communities-push-back-against-data-centers-n1271344"><img src="drought.webp" alt="Dry Land" /></a>
+          <span className="citation">Image: The Apple Data Center in Mesa, Ariz., in 2017, impacting drought-stricken communities. </span>
+        </div>
+        <div className="blurb-right">
+          <h2>What Happens If We Don’t Act</h2>
+          <br></br>
+          <p>If we don’t keep institutions and ourselves in check, energy demands will continue to skyrocket, accelerating global warming and pushing communities into water stress. Factories will mine deeper for materials, displacing people, and destroying ecosystems. Without federal regulations and public pressure, companies have little reason to slow down. </p>
+          <br></br>
+          <p>We are at risk: the risk of locking in a future where AI convenience comes at the cost of people, of the world.</p>
+        </div>
+      </div>
+
+      <div className="blurb">
+        <div className="blurb-left">
+          <h2>How You Can Help</h2>
+          <br></br>
+          <p> The good news? We can change course. As individuals, we can use AI more consciously, cutting back on trivial prompts, batch prompting, and using lighter models when possible. As a society, we must call for corporate and institutional accountability. This means demanding transparency on carbon emissions and advocating for investment in sustainable infrastructure, like clean cooling systems and data centers powered by renewable energy.</p>
+          <br></br>
+          <p>Being aware is the first step. The more people who understand AI’s hidden environmental costs, the greater the collective pressure there is to build systems that are both powerful and sustainable. </p>
+        </div>
+        <div className="blurb-image">
+          <a href="https://www.greenmatch.co.uk/blog/top-countries-with-sustainable-data-centres">          <img src="sustainable.avif" alt="Solutions for a Sustainable Data Center" /></a>
+          
+          <span className="citation">Image: Sutainable Data Center Model</span>
+        </div>
+      </div>
+    </div>
+
+
     {/* Link text to Google Doc */}
     <p className="results-link">
       Read more about our <a href="https://docs.google.com/document/d/1TlMySydvNZwFaaoJoEQJum9m1lcZqLHacZ5_J1k9PUI/edit?usp=sharing" target="_blank" rel="noopener noreferrer">sources</a> here.
@@ -305,7 +356,6 @@ export default function OpenAIHome() {
             />
             <div 
               className="back-anim-offset-container"
-              // You can adjust the transform here to offset the animation
               style={{ transform: 'translateX(-380px) translateY(0px)' }}
             >
               <Lottie 
@@ -320,13 +370,13 @@ export default function OpenAIHome() {
       )}
       {/* LEFT COLUMN */}
       <div className="left-col">
-        <div className="logo">OpenAI</div>
+        <div className="logo">ReThinkAI</div>
         <div className="left-text"> 
           <p className="tagline">Research</p>
           <p className="tagline">Safety</p>
           <p className="tagline">For People</p>
           <p className="tagline">For You</p>
-          <p className="tagline">ChatGPT</p>
+          <p className="tagline">ReThinkAI</p>
           <p className="tagline">Data Centers</p>
           <p className="tagline">Stories</p>
           <p className="tagline">Company</p>
@@ -366,20 +416,26 @@ export default function OpenAIHome() {
         {currentPage === 'questions' && (
           <div className="questions-page">
             <div className="questions-header">
-              <button className="back-home-btn" onClick={handleBackToHome}>
-                ← Home
-              </button>
-              <div className="progress-indicator">
-                Question {currentQuestion} of 7
-              </div>
-              <div className="score-display">
-                Score: {score} /  {Object.keys(answers).length}
-              </div>
-              {currentQuestion > 1 && (
-                <button className="prev-btn" onClick={handlePrevQuestion}>
-                  ← Previous
+              <div className="header-left">
+                <button className="back-home-btn" onClick={handleBackToHome}>
+                  ← Home
                 </button>
-              )}
+              </div>
+              <div className="header-center">
+                <div className="progress-indicator">
+                  Question {currentQuestion} of 7
+                </div>
+                <div className="score-display">
+                  Score: {score} / {Object.keys(answers).length}
+                </div>
+              </div>
+              <div className="header-right">
+                {currentQuestion > 1 && (
+                  <button className="prev-btn" onClick={handlePrevQuestion}>
+                    ← Previous
+                  </button>
+                )}
+              </div>
             </div>
 
             <div className="question-content">

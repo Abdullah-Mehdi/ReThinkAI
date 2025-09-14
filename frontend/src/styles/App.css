@@ -185,6 +185,23 @@ html, body, .homepage {
   align-items: center;
   padding: 2rem;
   border-bottom: 1px solid #333;
+  min-height: 80px; 
+}
+
+.header-left, .header-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  min-width: 150px; 
+}
+
+.header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  text-align: center;
 }
 
 .back-home-btn, .prev-btn {
@@ -197,6 +214,7 @@ html, body, .homepage {
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.3s ease;
+  z-index: 10;
 }
 
 .back-home-btn:hover, .prev-btn:hover {
@@ -209,7 +227,17 @@ html, body, .homepage {
 .progress-indicator {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #222222;
+  color: #000;
+}
+
+.score-display {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #333;
 }
 
 .question-content {
@@ -347,6 +375,16 @@ html, body, .homepage {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    padding: 1.5rem;
+  }
+
+  .header-left, .header-right {
+    min-width: auto;
+    justify-content: center;
+  }
+
+  .header-center {
+    gap: 1rem;
   }
   
   .question-content {
@@ -410,7 +448,7 @@ html, body, .homepage {
   align-items: center;
   font-family: 'Open Sans', sans-serif;
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 6rem 2rem;
 }
 
 .results-page h1 {
@@ -495,6 +533,7 @@ html, body, .homepage {
   font-weight: 600;
   transition: all 0.3s ease;
   gap: 8px;
+  margin-bottom: 2rem;
 }
 
 .results-buttons .next-btn:hover {
@@ -510,6 +549,77 @@ html, body, .homepage {
 .results-link a {
   color: #667eea ;
   text-decoration: underline;
+}
+
+.scroll-down-hint {
+  margin-top: 2rem;
+  text-align: center;
+  animation: fadeIn 1s ease-in;
+  color: #555;
+}
+
+.scroll-down-hint p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.down-arrow {
+  font-size: 2rem;
+  animation: bounce 1.5s infinite;
+}
+
+/* Subtle bouncing arrow animation */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+.results-blurbs {
+  margin-top: 4rem;
+  margin-left: 8rem;
+  margin-right: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.blurb {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.blurb-left {
+  margin: 0.5rem;
+  text-align: left;
+}
+
+.blurb-right {
+  margin: 0.5rem;
+  text-align: left;
+}
+
+
+
+.blurb-image img {
+  padding: 2rem;
+  width: 100%;
+  /* border-radius: 12px; */
+}
+
+.citation {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
 }
 
 .mc-blank-overlay {
