@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Lottie from 'lottie-react'
 import './styles/App.css'
 import WaterBottleSlider from './components/WaterBottleSlider'
 
@@ -6,6 +7,8 @@ import { FaArrowUp } from "react-icons/fa6";
 import { RiLoopLeftLine } from "react-icons/ri";
 
 import TypingBubble from './components/TypingBubble.jsx';
+import backImg from './assets/backdrop.svg'
+import backAnim from './assets/animatedElements.json'
 
 export default function OpenAIHome() {
   const [isTyping, setIsTyping] = useState(false);
@@ -248,39 +251,45 @@ export default function OpenAIHome() {
   // Show questions page
   if (currentPage === 'questions') {
     const currentQ = questions[currentQuestion];
+    const imageOffset = -(currentQuestion - 1);
     
     // RENDER QUESTIONS PAGE (depending on question type...)
     return (
-      <div className="questions-page">
-        <div className="questions-header">
-          <button className="back-home-btn" onClick={handleBackToHome}>
-            ← Home
-          </button>
-          <div className="progress-indicator">
-            Question {currentQuestion} of 7
-          </div>
-          <div className="score-display">
-            Score: {score} / {currentQuestion - 1}
-          </div>
-          {currentQuestion > 1 && (
-            <button className="prev-btn" onClick={handlePrevQuestion}>
-              ← Previous
-            </button>
-          )}
-        </div>
-
-        <div className="question-content">
-          {currentQ.type === 'fillblank-slider' && (
-            <FillBlankSlider 
-              questionData={currentQ} 
-              onAnswer={handleNextQuestion}
+      <>
+        <div className="back-img-container">
+          <div 
+            className="moving-elements-wrapper"
+            style={{ transform: `translateX(calc(${imageOffset} * 100vw))` }}
+          >
+            <img
+              className="back-img"
+              src={backImg}
+              alt="Decorative background"
             />
-          )}
-          
-          {currentQ.type === 'component' && currentQ.component && (
-            <div className="component-question">
-              <currentQ.component onAnswer={handleNextQuestion} />
+            <div 
+              className="back-anim-offset-container"
+              // You can adjust the transform here to offset the animation
+              style={{ transform: 'translateX(-380px) translateY(0px)' }}
+            >
+              <Lottie 
+                className='back-anim' 
+                animationData={backAnim} 
+                loop 
+                autoplay 
+              />
             </div>
+          </div>
+        </div>
+        <div className="questions-page">
+          <div className="questions-header">
+            <button className="back-home-btn" onClick={handleBackToHome}>
+              ← Home
+            </button>
+            <div className="progress-indicator">
+              Question {currentQuestion} of 7
+            </div>
+            <div className="score-display">
+              Score: {score} / {currentQuestion - 1}
           )}
 
           {currentQ.type === 'placeholder' && (
@@ -294,9 +303,42 @@ export default function OpenAIHome() {
                 {currentQuestion === 7 ? 'See Results' : 'Next Question'}
               </button>
             </div>
-          )}
+            {currentQuestion > 1 && (
+              <button className="prev-btn" onClick={handlePrevQuestion}>
+                ← Previous
+              </button>
+            )}
+          </div>
+
+          <div className="question-content">
+            {currentQ.type === 'fillblank-slider' && (
+              <FillBlankSlider 
+                questionData={currentQ} 
+                onAnswer={handleNextQuestion}
+              />
+            )}
+            
+            {currentQ.type === 'component' && currentQ.component && (
+              <div className="component-question">
+                <currentQ.component onAnswer={handleNextQuestion} />
+              </div>
+            )}
+
+            {currentQ.type === 'placeholder' && (
+              <div className="placeholder-question">
+                <h2>{currentQ.text}</h2>
+                <p>This question will be implemented later.</p>
+                <button 
+                  className="next-btn"
+                  onClick={() => handleNextQuestion('placeholder')}
+                >
+                  Next Question
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 

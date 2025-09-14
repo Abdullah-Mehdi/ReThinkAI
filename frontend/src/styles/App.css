@@ -167,11 +167,16 @@ html, body, .homepage {
 /* Questions Page - Inverse Theme :smiling_imp_emoji: */
 .questions-page {
   min-height: 100vh;
-  background: #1a1a1a; 
-  color: #ffffff; 
+  color: #000000; 
   display: flex;
   flex-direction: column;
   font-family: 'Open Sans', sans-serif;
+
+  position: relative;
+}
+
+.questions-page > * {
+    z-index: 2;
 }
 
 .questions-header {
@@ -204,7 +209,7 @@ html, body, .homepage {
 .progress-indicator {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #bbb;
+  color: #222222;
 }
 
 .question-content {
@@ -226,7 +231,10 @@ html, body, .homepage {
   font-weight: 600;
   margin-bottom: 3rem;
   line-height: 1.4;
-  color: #fff;
+  color: #000000;
+  background-color: white;
+  border: 2px black solid;
+  padding: 1em;
 }
 
 /* Fill-in-the-blank input */
@@ -354,6 +362,43 @@ html, body, .homepage {
   }
 }
 
+.back-img-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.moving-elements-wrapper {
+  position: relative;
+  height: 100%;
+  width: max-content;
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+}
+
+.back-img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+.back-anim-offset-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.back-anim {
+  width: 100%;
+  height: 100%;
+}
+=======
 
 /* Results Page - match dark theme of questions */
 .results-page {
@@ -467,4 +512,3 @@ html, body, .homepage {
   color: #667eea ;
   text-decoration: underline;
 }
-
