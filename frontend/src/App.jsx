@@ -110,11 +110,6 @@ export default function OpenAIHome() {
       // All questions completed
       console.log('All answers:', { ...answers, [currentQuestion]: answer });
       // alert('Survey completed! Check console for answers.');
-      setCurrentPage('home');
-      setCurrentQuestion(1);
-      setAnswers({});
-      setScore(0);
-
       setCurrentPage('results');
     }
   };
@@ -131,6 +126,13 @@ export default function OpenAIHome() {
     setAnswers({});
     setScore(0);
   };
+
+  const handleRetake = () => {
+    setCurrentPage('questions');
+    setCurrentQuestion(1);
+    setAnswers({});
+    setScore(0);
+  }
 
   // Render Fill-in-the-blank with slider component
   const FillBlankSlider = ({ questionData, onAnswer }) => {
@@ -174,7 +176,7 @@ export default function OpenAIHome() {
           className="next-btn"
           onClick={() => onAnswer(sliderValue)}
         >
-          Next Question
+          {currentQuestion === 7 ? 'See Results' : 'Next Question'}
         </button>
       </div>
     );
@@ -190,7 +192,7 @@ export default function OpenAIHome() {
 
   return (
     <div className="results-page">
-      <h1>You got {totalPoints}/7 points!</h1>
+      <h1>You got {score}/7 points!</h1>
       <p>That's better than {percentageBetter}% of other users!!!</p>
 
       {/* Simple bar chart with Y axis */}
@@ -231,7 +233,7 @@ export default function OpenAIHome() {
       {/* Row of buttons */}
       <div className="results-buttons">
         <button className="next-btn" onClick={handleBackToHome}>Go Home</button>
-        <button className="next-btn" onClick={() => setCurrentPage('questions')}>Retake Quiz  <RiLoopLeftLine size={20} /></button>
+        <button className="next-btn" onClick={handleRetake}>Retake Quiz  <RiLoopLeftLine size={20} /></button>
       </div>
 
       {/* Link text to Google Doc */}
@@ -289,7 +291,7 @@ export default function OpenAIHome() {
                 className="next-btn"
                 onClick={() => handleNextQuestion('placeholder')}
               >
-                Next Question
+                {currentQuestion === 7 ? 'See Results' : 'Next Question'}
               </button>
             </div>
           )}
