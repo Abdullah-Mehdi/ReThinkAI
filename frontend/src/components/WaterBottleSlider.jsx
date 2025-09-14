@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import WaterBottle from './WaterBottle';
 import '../styles/WaterBottle.css';
 
-const WaterBottleSlider = () => {
+const WaterBottleSlider = ({ onAnswer }) => { // Add onAnswer prop
   const [selectedSize, setSelectedSize] = useState(8);
   
   // User selection
-    const handleSubmit = () => {
-    onAnswer(selectedSize); 
+  const handleSubmit = () => {
+    if (onAnswer) {
+      onAnswer(selectedSize); 
+    }
   };
 
   // Map bottle sizes to fill percentages
@@ -50,6 +52,14 @@ const WaterBottleSlider = () => {
           </div>
         </div>
       </div>
+      
+      <button 
+        className="next-btn"
+        onClick={handleSubmit}
+        style={{ marginTop: '2rem' }}
+      >
+        Next Question
+      </button>
     </div>
   );
 };

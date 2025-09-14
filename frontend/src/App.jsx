@@ -27,7 +27,7 @@ export default function OpenAIHome() {
       type: 'component',
       text: 'How much water does each AI prompt use?',
       component: WaterBottleSlider,
-      correctAnswer: '16oz' // this is wrong
+      correctAnswer: 16 
     },
     3: {
       type: 'placeholder',
@@ -209,13 +209,7 @@ export default function OpenAIHome() {
           
           {currentQ.type === 'component' && currentQ.component && (
             <div className="component-question">
-              <currentQ.component />
-              <button 
-                className="next-btn"
-                onClick={() => handleNextQuestion('component-answer')}
-              >
-                Next Question
-              </button>
+              <currentQ.component onAnswer={handleNextQuestion} />
             </div>
           )}
 
