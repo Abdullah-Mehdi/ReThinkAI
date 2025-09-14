@@ -353,3 +353,118 @@ html, body, .homepage {
     max-width: 90%;
   }
 }
+
+
+/* Results Page - match dark theme of questions */
+.results-page {
+  min-height: 100vh;
+  background: #1a1a1a;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.results-page h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.results-page p {
+  font-size: 1.2rem;
+  color: #bbb;
+}
+
+.bar-chart-container {
+  display: flex;
+  align-items: flex-end; /* bottom-align axis and bars */
+  gap: 15px;
+  margin: 40px;
+}
+
+.y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px; /* should match the tallest bar area */
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.y-label {
+  text-align: right;
+}
+
+.bar-chart {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  height: 200px;
+  
+}
+
+.bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+
+.bar-fill {
+  /* change width to make graph "bigger" */
+  width: 40px; 
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 6px 6px 0 0;
+  transition: height 0.3s ease;
+}
+
+.bar-label {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+/* Results buttons row */
+.results-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: -2rem;
+}
+
+.results-buttons .next-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  gap: 8px;
+}
+
+.results-buttons .next-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.results-link {
+  margin-top: 2rem;
+  font-size: 1rem;
+}
+
+.results-link a {
+  color: #667eea ;
+  text-decoration: underline;
+}
+

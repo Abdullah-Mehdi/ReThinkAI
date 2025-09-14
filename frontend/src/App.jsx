@@ -3,6 +3,8 @@ import './styles/App.css'
 import WaterBottleSlider from './components/WaterBottleSlider'
 
 import { FaArrowUp } from "react-icons/fa6";
+import { RiLoopLeftLine } from "react-icons/ri";
+
 import TypingBubble from './components/TypingBubble.jsx';
 
 export default function OpenAIHome() {
@@ -93,10 +95,12 @@ export default function OpenAIHome() {
     } else {
       // All questions completed
       console.log('All answers:', { ...answers, [currentQuestion]: answer });
-      alert('Survey completed! Check console for answers.');
+      // alert('Survey completed! Check console for answers.');
       setCurrentPage('home');
       setCurrentQuestion(1);
       setAnswers({});
+
+      setCurrentPage('results');
     }
   };
 
@@ -159,6 +163,69 @@ export default function OpenAIHome() {
       </div>
     );
   };
+
+  if (currentPage === 'results') {
+  const totalPoints = Object.values(answers).reduce((sum, ans) => {
+    // For now: count any answer as 1 point (replace with real scoring logic later)
+    return sum + (ans === 'placeholder' || ans === 'component-answer' ? 1 : 1);
+  }, 0);
+
+  const percentageBetter = Math.floor((totalPoints / 7) * 100); // fake comparison %
+
+  return (
+    <div className="results-page">
+      <h1>You got {totalPoints}/7 points!</h1>
+      <p>That's better than {percentageBetter}% of other users!!!</p>
+
+      {/* Simple bar chart with Y axis */}
+<div className="bar-chart-container">
+  {/* Y axis labels */}
+  <div className="y-axis">
+    {[60, 50, 40, 30, 20, 10, 0].map((percent) => (
+      <div key={percent} className="y-label">
+        {percent}%
+      </div>
+    ))}
+  </div>
+
+  {/* Bars */}
+  <div className="bar-chart">
+    {[
+      { score: 0, height: 20 },
+      { score: 1, height: 10 },
+      { score: 2, height: 30 },
+      { score: 3, height: 60 },
+      { score: 4, height: 110 },
+      { score: 5, height: 30},
+      { score: 6, height: 20 },
+      { score: 7, height: 10 },
+    ].map(({ score, height }) => (
+      <div key={score} className="bar">
+        <div 
+          className="bar-fill" 
+          style={{ height: `${height}px` }}
+        />
+        <span className="bar-label">{score}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+
+      {/* Row of buttons */}
+      <div className="results-buttons">
+        <button className="next-btn" onClick={handleBackToHome}>Go Home</button>
+        <button className="next-btn" onClick={() => setCurrentPage('questions')}>Retake Quiz  <RiLoopLeftLine size={20} /></button>
+      </div>
+
+      {/* Link text to Google Doc */}
+      <p className="results-link">
+        Read more about our <a href="https://docs.google.com/document/d/1TlMySydvNZwFaaoJoEQJum9m1lcZqLHacZ5_J1k9PUI/edit?usp=sharing" target="_blank" rel="noopener noreferrer">sources</a> here.
+      </p>
+    </div>
+  );
+}
+
 
   // Show questions page
   if (currentPage === 'questions') {
