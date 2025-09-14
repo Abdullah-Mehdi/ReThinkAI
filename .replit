@@ -33,11 +33,7 @@ outputType = "webview"
 localPort = 5000
 externalPort = 80
 
-[[ports]]
-localPort = 42043
-externalPort = 3000
-
 [deployment]
 deploymentTarget = "autoscale"
 run = ["bash", "-c", "cd frontend && npm run start"]
-build = ["bash", "-c", "cd frontend && npm ci && npm run build"]
+build = ["bash", "-c", "cd frontend && npm install && npm run build"]
