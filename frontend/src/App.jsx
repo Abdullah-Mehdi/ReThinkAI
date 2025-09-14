@@ -245,6 +245,51 @@ export default function OpenAIHome() {
       <button className="next-btn" onClick={handleRetake}>Retake Quiz  <RiLoopLeftLine size={20} /></button>
     </div>
 
+    <div className="results-blurbs">
+      <div className="blurb">
+        <div className="blurb-left">
+          <h2>The Hidden Cost of AI</h2>
+          <br></br>
+          <p>To most, generative AI is just words appearing on their screen. But behind every search are massive data centers, drawing electricity, water, and rare minerals. These systems release CO2, strain freshwater supplies, and drive resource extraction.</p>
+          <br></br>
+          <p>“The ease-of-use of generative AI interfaces and the lack of information about the environmental impacts of my actions means that, as a user, I don’t have much incentive to cut back on my use of generative AI,” - Noman Bashir, a Computing and Climate Impact Fellow at MIT Climate and Sustainability Consortium (MCSC). </p>
+        </div>
+        <div className="blurb-image">
+          <img src="datacenters.avif" alt="Amazon Data Center" />
+          <span className="citation">Image: An aerial view of an Amazon data center in Northern Virginia, one of the largest data center markets in the world.</span>
+        </div>
+      </div>
+
+      <div className="blurb">
+        <div className="blurb-image">
+          <img src="drought.webp" alt="Dry Land" />
+          <span className="citation">Image: The Apple Data Center in Mesa, Ariz., in 2017, impacting drought-stricken communities. </span>
+        </div>
+        <div className="blurb-right">
+          <h2>What Happens If We Don’t Act</h2>
+          <br></br>
+          <p>If we don’t keep institutions and ourselves in check, energy demands will continue to skyrocket, accelerating global warming and pushing communities into water stress. Factories will mine deeper for materials, displacing people, and destroying ecosystems. Without federal regulations and public pressure, companies have little reason to slow down. </p>
+          <br></br>
+          <p>We are at risk: the risk of locking in a future where AI convenience comes at the cost of people, of the world.</p>
+        </div>
+      </div>
+
+      <div className="blurb">
+        <div className="blurb-left">
+          <h2>How You Can Help</h2>
+          <br></br>
+          <p> The good news? We can change course. As individuals, we can use AI more consciously, cutting back on trivial prompts, batch prompting, and using lighter models when possible. As a society, we must call for corporate and institutional accountability. This means demanding transparency on carbon emissions and advocating for investment in sustainable infrastructure, like clean cooling systems and data centers powered by renewable energy.</p>
+          <br></br>
+          <p>Being aware is the first step. The more people who understand AI’s hidden environmental costs, the greater the collective pressure there is to build systems that are both powerful and sustainable. </p>
+        </div>
+        <div className="blurb-image">
+          <img src="sustainable.avif" alt="Solutions for a Sustainable Data Center" />
+          <span className="citation">Image: Sutainable Data Center Model</span>
+        </div>
+      </div>
+    </div>
+
+
     {/* Link text to Google Doc */}
     <p className="results-link">
       Read more about our <a href="https://docs.google.com/document/d/1TlMySydvNZwFaaoJoEQJum9m1lcZqLHacZ5_J1k9PUI/edit?usp=sharing" target="_blank" rel="noopener noreferrer">sources</a> here.

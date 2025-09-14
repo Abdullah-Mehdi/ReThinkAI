@@ -511,3 +511,44 @@ html, body, .homepage {
   color: #667eea ;
   text-decoration: underline;
 }
+
+.results-blurbs {
+  margin-top: 6rem;
+  margin-left: 8rem;
+  margin-right: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.blurb {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.blurb-left {
+  margin: 0.5rem;
+  text-align: left;
+}
+
+.blurb-right {
+  margin: 0.5rem;
+  text-align: right;
+}
+
+
+
+.blurb-image img {
+  width: 100%;
+  /* border-radius: 12px; */
+}
+
+.citation {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
