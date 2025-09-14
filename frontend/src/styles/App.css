@@ -448,7 +448,7 @@ html, body, .homepage {
   align-items: center;
   font-family: 'Open Sans', sans-serif;
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 6rem 2rem;
 }
 
 .results-page h1 {
@@ -533,6 +533,7 @@ html, body, .homepage {
   font-weight: 600;
   transition: all 0.3s ease;
   gap: 8px;
+  margin-bottom: 2rem;
 }
 
 .results-buttons .next-btn:hover {
@@ -550,8 +551,37 @@ html, body, .homepage {
   text-decoration: underline;
 }
 
+.scroll-down-hint {
+  margin-top: 2rem;
+  text-align: center;
+  animation: fadeIn 1s ease-in;
+  color: #555;
+}
+
+.scroll-down-hint p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.down-arrow {
+  font-size: 2rem;
+  animation: bounce 1.5s infinite;
+}
+
+/* Subtle bouncing arrow animation */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
 .results-blurbs {
-  margin-top: 6rem;
+  margin-top: 4rem;
   margin-left: 8rem;
   margin-right: 8rem;
   display: flex;
@@ -579,6 +609,7 @@ html, body, .homepage {
 
 
 .blurb-image img {
+  padding: 2rem;
   width: 100%;
   /* border-radius: 12px; */
 }

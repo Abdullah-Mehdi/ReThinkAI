@@ -202,7 +202,7 @@ export default function OpenAIHome() {
   }, 0);
 
   // const percentageBetter = Math.floor((totalPoints / 7) * 100); // fake comparison %
-  const scorePercentMap = [5, 20, 35, 50, 65, 80, 90, 99];
+  const scorePercentMap = [0, 5, 9, 19, 38, 67, 83, 90];
   const percentageBetter = scorePercentMap[score];
 
   return (
@@ -251,6 +251,11 @@ export default function OpenAIHome() {
       <button className="next-btn" onClick={handleRetake}>Retake Quiz  <RiLoopLeftLine size={20} /></button>
     </div>
 
+    <div className="scroll-down-hint">
+      <p>Scroll down for more information</p>
+      <div className="down-arrow">↓</div>
+    </div>
+
     <div className="results-blurbs">
       <div className="blurb">
         <div className="blurb-left">
@@ -261,14 +266,14 @@ export default function OpenAIHome() {
           <p>“The ease-of-use of generative AI interfaces and the lack of information about the environmental impacts of my actions means that, as a user, I don’t have much incentive to cut back on my use of generative AI,” - Noman Bashir, a Computing and Climate Impact Fellow at MIT Climate and Sustainability Consortium (MCSC). </p>
         </div>
         <div className="blurb-image">
-          <img src="datacenters.avif" alt="Amazon Data Center" />
+          <a href = "https://www.technologyreview.com/2025/04/10/1114912/why-the-climate-promises-of-ai-sound-a-lot-like-carbon-offsets/"><img src="datacenters.avif" alt="Amazon Data Center" /></a>
           <span className="citation">Image: An aerial view of an Amazon data center in Northern Virginia, one of the largest data center markets in the world.</span>
         </div>
       </div>
 
       <div className="blurb">
         <div className="blurb-image">
-          <img src="drought.webp" alt="Dry Land" />
+          <a href = "https://www.nbcnews.com/tech/internet/drought-stricken-communities-push-back-against-data-centers-n1271344"><img src="drought.webp" alt="Dry Land" /></a>
           <span className="citation">Image: The Apple Data Center in Mesa, Ariz., in 2017, impacting drought-stricken communities. </span>
         </div>
         <div className="blurb-right">
@@ -289,7 +294,8 @@ export default function OpenAIHome() {
           <p>Being aware is the first step. The more people who understand AI’s hidden environmental costs, the greater the collective pressure there is to build systems that are both powerful and sustainable. </p>
         </div>
         <div className="blurb-image">
-          <img src="sustainable.avif" alt="Solutions for a Sustainable Data Center" />
+          <a href="https://www.greenmatch.co.uk/blog/top-countries-with-sustainable-data-centres">          <img src="sustainable.avif" alt="Solutions for a Sustainable Data Center" /></a>
+          
           <span className="citation">Image: Sutainable Data Center Model</span>
         </div>
       </div>
