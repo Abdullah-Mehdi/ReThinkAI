@@ -125,6 +125,7 @@ export default function OpenAIHome() {
     setCurrentPage('home');
     setCurrentQuestion(1);
     setAnswers({});
+    setScore(0);
   };
 
   // Render Fill-in-the-blank with slider component
