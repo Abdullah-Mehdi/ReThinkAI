@@ -1,0 +1,178 @@
+/* Water Bottle Slider Styles */
+.water-bottle-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.question-container {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.question-container h2 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.question-container p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.bottle-and-controls {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bottle Display */
+.bottle-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.water-bottle-container {
+  position: relative;
+}
+
+.water-bottle {
+  transition: all 0.3s ease;
+}
+
+.water-fill {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.water-surface {
+  animation: ripple 2s ease-in-out infinite;
+}
+
+@keyframes ripple {
+  0%, 100% { rx: 27; opacity: 0.8; }
+  50% { rx: 30; opacity: 0.6; }
+}
+
+.volume-label {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+/* Vertical Slider */
+.vertical-slider-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  height: 200px;
+}
+
+.vertical-slider {
+  writing-mode: bt-lr; 
+  -webkit-appearance: slider-vertical; 
+  appearance: slider-vertical;
+  width: 8px;
+  height: 180px;
+  background: linear-gradient(to top, #3498db, #2ecc71);
+  outline: none;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.vertical-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #3498db;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.vertical-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  border-color: #2980b9;
+}
+
+.vertical-slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #3498db;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.vertical-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 180px;
+  align-items: flex-start;
+}
+
+.label-item {
+  font-size: 1rem;
+  color: #7f8c8d;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.label-item:hover {
+  color: #3498db;
+  background: rgba(52, 152, 219, 0.1);
+  transform: translateX(5px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .bottle-and-controls {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .vertical-slider-container {
+    flex-direction: row;
+    height: auto;
+    width: 250px;
+  }
+  
+  .vertical-slider {
+    writing-mode: initial;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 200px;
+    height: 8px;
+    transform: rotate(0deg);
+  }
+  
+  .vertical-labels {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 200px;
+    height: auto;
+  }
+  
+  .water-bottle-slider {
+    padding: 1rem;
+    margin: 1rem;
+  }
+}
