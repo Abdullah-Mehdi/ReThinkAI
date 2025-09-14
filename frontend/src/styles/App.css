@@ -1,25 +1,110 @@
-body {
+ @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+/* Reset & base */
+* {
   margin: 0;
-  display: flex;
-  flex-direction: row;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#root {
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-
-.main-window {
+html, body, .homepage {
   height: 100%;
-  width: 1200px;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #fff;
+  color: #000;
 }
 
-.side-window {
-  flex-grow: 1;
-  background-color: darkblue;
+.homepage {
+  display: flex;
 }
 
+/* LEFT COLUMN */
+.left-col {
+  height: 100vh;
+  width: 20%;
+  min-width: 240px;
+  background: #ffffff;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  /* border-right: 1px solid #1f1f1f; */
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  /* margin-bottom: 1rem; */
+}
+
+.left-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  height: 100vh;
+}
+
+.tagline {
+  color: #000;
+  font-size: 1rem;
+  line-height: 1.5;
+
+}
+
+/* RIGHT COLUMN */
+.right-col {
+  height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.prompt-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Input area */
+.input-container {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #bdbdbd;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.2);
+  padding: 0.75rem 1rem;
+  border-radius: 30px;
+}
+
+.prompt-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #000;
+  font-size: 1rem;
+  
+}
+
+.send-btn {
+  background: #bdbdbd;
+  border: none;
+  color: #000;
+  border-radius: 60px;
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.send-btn:hover {
+  color: white;
+  background: #333;
+}
