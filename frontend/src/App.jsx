@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import Lottie from 'lottie-react'
 import './styles/App.css'
 import WaterBottleSlider from './components/WaterBottleSlider'
 
 import { FaArrowUp } from "react-icons/fa6";
 import TypingBubble from './components/TypingBubble.jsx';
+import backImg from './assets/backdrop.svg'
 
 export default function OpenAIHome() {
   const [isTyping, setIsTyping] = useState(false);
@@ -182,7 +184,9 @@ export default function OpenAIHome() {
     
     // RENDER QUESTIONS PAGE (depending on question type...)
     return (
-      <div className="questions-page">
+      <>
+      <img className="back-img" src={backImg} />
+            <div className="questions-page">
         <div className="questions-header">
           <button className="back-home-btn" onClick={handleBackToHome}>
             ← Home
@@ -228,6 +232,7 @@ export default function OpenAIHome() {
           )}
         </div>
       </div>
+      </>
     );
   }
 
