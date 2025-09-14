@@ -11,6 +11,7 @@ export default function OpenAIHome() {
   const [inputText, setInputText] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(1); // Track which question (1-7)
   const [answers, setAnswers] = useState({}); // Store all answers.. hehehe...
+  const [score, setScore] = useState(0);
 
   // Question data
   const questions = {
@@ -19,36 +20,43 @@ export default function OpenAIHome() {
       text: 'ChatGPT query consumes about _____ times more electricity than a simple web search.',
       blankWord: '5',
       sliderRange: [1, 10],
+      correctAnswer: 5,
       component: null
     },
     2: {
       type: 'component',
       text: 'How much water does each AI prompt use?',
-      component: WaterBottleSlider
+      component: WaterBottleSlider,
+      correctAnswer: '16oz' // this is wrong
     },
     3: {
       type: 'placeholder',
       text: 'Question 3 placeholder',
+      correctAnswer: 'placeholder',
       component: null
     },
     4: {
       type: 'placeholder',
       text: 'Question 4 placeholder',
+      correctAnswer: 'placeholder',
       component: null
     },
     5: {
       type: 'placeholder',
       text: 'Question 5 placeholder',
+      correctAnswer: 'placeholder',
       component: null
     },
     6: {
       type: 'placeholder',
       text: 'Question 6 placeholder',
+      correctAnswer: 'placeholder',
       component: null
     },
     7: {
       type: 'placeholder',
       text: 'Question 7 placeholder',
+      correctAnswer: 'placeholder',
       component: null
     }
   };
@@ -87,6 +95,12 @@ export default function OpenAIHome() {
       [currentQuestion]: answer
     }));
 
+    const currentQ = questions[currentQuestion];
+    // Update score if answer is correct
+    if (answer === currentQ.correctAnswer) {
+      setScore(prev => prev + 1);
+    }
+
     // Move to next question or finish (FOR NOW - we will change the finish state later)
     if (currentQuestion < 7) {
       setCurrentQuestion(prev => prev + 1);
@@ -97,6 +111,7 @@ export default function OpenAIHome() {
       setCurrentPage('home');
       setCurrentQuestion(1);
       setAnswers({});
+      setScore(0);
     }
   };
 
@@ -173,6 +188,9 @@ export default function OpenAIHome() {
           </button>
           <div className="progress-indicator">
             Question {currentQuestion} of 7
+          </div>
+          <div className="score-display">
+            Score: {score} / {currentQuestion - 1}
           </div>
           {currentQuestion > 1 && (
             <button className="prev-btn" onClick={handlePrevQuestion}>
