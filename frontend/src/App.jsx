@@ -1,9 +1,19 @@
-import { useState } from 'react'
-import './styles/App.css'
-
+import { useState } from 'react';
+import './styles/App.css';
 import { FaArrowUp } from "react-icons/fa6";
+import TypingBubble from './components/TypingBubble.jsx';
 
 export default function OpenAIHome() {
+  const [isTyping, setIsTyping] = useState(false);
+
+  const handleSend = () => {
+    setIsTyping(true);
+
+    setTimeout(() => {
+      setIsTyping(false);
+    }, 3000);
+  }
+
   return (
     <div className="homepage">
       {/* LEFT COLUMN */}
@@ -26,16 +36,18 @@ export default function OpenAIHome() {
       {/* RIGHT COLUMN */}
       <div className="right-col">
         <h1 className="prompt-title">What can I help with?</h1>
+        {isTyping && <TypingBubble />}
         <div className="input-container">
           <input
             type="text"
             placeholder="Type your question..."
             className="prompt-input"
           />
-          <button className="send-btn">
+          <button className="send-btn" onClick={handleSend}>
             <FaArrowUp size={20} />
           </button>
         </div>
+
       </div>
     </div>
   );
