@@ -280,7 +280,6 @@ export default function OpenAIHome() {
             />
             <div 
               className="back-anim-offset-container"
-              // You can adjust the transform here to offset the animation
               style={{ transform: 'translateX(-380px) translateY(0px)' }}
             >
               <Lottie 
@@ -339,20 +338,26 @@ export default function OpenAIHome() {
         {currentPage === 'questions' && (
           <div className="questions-page">
             <div className="questions-header">
-              <button className="back-home-btn" onClick={handleBackToHome}>
-                ← Home
-              </button>
-              <div className="progress-indicator">
-                Question {currentQuestion} of 7
-              </div>
-              <div className="score-display">
-                Score: {score} /  {Object.keys(answers).length}
-              </div>
-              {currentQuestion > 1 && (
-                <button className="prev-btn" onClick={handlePrevQuestion}>
-                  ← Previous
+              <div className="header-left">
+                <button className="back-home-btn" onClick={handleBackToHome}>
+                  ← Home
                 </button>
-              )}
+              </div>
+              <div className="header-center">
+                <div className="progress-indicator">
+                  Question {currentQuestion} of 7
+                </div>
+                <div className="score-display">
+                  Score: {score} / {Object.keys(answers).length}
+                </div>
+              </div>
+              <div className="header-right">
+                {currentQuestion > 1 && (
+                  <button className="prev-btn" onClick={handlePrevQuestion}>
+                    ← Previous
+                  </button>
+                )}
+              </div>
             </div>
 
             <div className="question-content">
