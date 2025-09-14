@@ -173,7 +173,10 @@ html, body, .homepage {
   font-family: 'Open Sans', sans-serif;
 
   position: relative;
-  z-index: 1;
+}
+
+.questions-page > * {
+    z-index: 2;
 }
 
 .questions-header {
@@ -359,11 +362,18 @@ html, body, .homepage {
   }
 }
 
-.back-img {
-  position: absolute;
-  z-index: 0;
-
+.back-img-container {
+  position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;                                                                                                                                                                                       
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.back-img {
+  height: 100%;
+  width: auto;
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }

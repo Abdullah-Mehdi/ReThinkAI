@@ -181,57 +181,65 @@ export default function OpenAIHome() {
   // Show questions page
   if (currentPage === 'questions') {
     const currentQ = questions[currentQuestion];
+    const imageOffset = -(currentQuestion - 1);
     
     // RENDER QUESTIONS PAGE (depending on question type...)
     return (
       <>
-      <img className="back-img" src={backImg} />
-            <div className="questions-page">
-        <div className="questions-header">
-          <button className="back-home-btn" onClick={handleBackToHome}>
-            ← Home
-          </button>
-          <div className="progress-indicator">
-            Question {currentQuestion} of 7
-          </div>
-          <div className="score-display">
-            Score: {score} / {currentQuestion - 1}
-          </div>
-          {currentQuestion > 1 && (
-            <button className="prev-btn" onClick={handlePrevQuestion}>
-              ← Previous
+        <div className="back-img-container">
+          <img
+            className="back-img"
+            src={backImg}
+            style={{ transform: `translateX(calc(${imageOffset} * 100vw))` }}
+            alt="Decorative background"
+          />
+        </div>
+        <div className="questions-page">
+          <div className="questions-header">
+            <button className="back-home-btn" onClick={handleBackToHome}>
+              ← Home
             </button>
-          )}
-        </div>
-
-        <div className="question-content">
-          {currentQ.type === 'fillblank-slider' && (
-            <FillBlankSlider 
-              questionData={currentQ} 
-              onAnswer={handleNextQuestion}
-            />
-          )}
-          
-          {currentQ.type === 'component' && currentQ.component && (
-            <div className="component-question">
-              <currentQ.component onAnswer={handleNextQuestion} />
+            <div className="progress-indicator">
+              Question {currentQuestion} of 7
             </div>
-          )}
-
-          {currentQ.type === 'placeholder' && (
-            <div className="placeholder-question">
-              <h2>{currentQ.text}</h2>
-              <p>This question will be implemented later.</p>
-              <button 
-                className="next-btn"
-                onClick={() => handleNextQuestion('placeholder')}
-              >
-                Next Question
+            <div className="score-display">
+              Score: {score} / {currentQuestion - 1}
+            </div>
+            {currentQuestion > 1 && (
+              <button className="prev-btn" onClick={handlePrevQuestion}>
+                ← Previous
               </button>
-            </div>
-          )}
+            )}
+          </div>
+
+          <div className="question-content">
+            {currentQ.type === 'fillblank-slider' && (
+              <FillBlankSlider 
+                questionData={currentQ} 
+                onAnswer={handleNextQuestion}
+              />
+            )}
+            
+            {currentQ.type === 'component' && currentQ.component && (
+              <div className="component-question">
+                <currentQ.component onAnswer={handleNextQuestion} />
+              </div>
+            )}
+
+            {currentQ.type === 'placeholder' && (
+              <div className="placeholder-question">
+                <h2>{currentQ.text}</h2>
+                <p>This question will be implemented later.</p>
+                <button 
+                  className="next-btn"
+                  onClick={() => handleNextQuestion('placeholder')}
+                >
+                  Next Question
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
       </>
     );
   }
