@@ -117,7 +117,7 @@ html, body, .homepage {
   max-width: 200px;
   position: relative;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 .bubble::after {
@@ -575,4 +575,11 @@ html, body, .homepage {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
   border-color: #764ba2;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
 }

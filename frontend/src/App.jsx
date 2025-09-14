@@ -315,7 +315,6 @@ export default function OpenAIHome() {
         {currentPage === 'home' && (
           <>
             <h1 className="prompt-title">What can I help with?</h1>
-            {isTyping && <TypingBubble />}
             <div className="input-container">
               <input
                 type="text"
@@ -325,13 +324,16 @@ export default function OpenAIHome() {
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
               />
-              <button 
-                className="send-btn"
-                onClick={handleSendClick}
-                disabled={!inputText.trim()}
-              >
-                <FaArrowUp size={20} />
-              </button>
+              <div className='button-group'>
+                {isTyping && <TypingBubble />}
+                <button 
+                  className="send-btn"
+                  onClick={handleSendClick}
+                  disabled={!inputText.trim()}
+                >
+                  <FaArrowUp size={20} />
+                </button>
+              </div>
             </div>
           </>
         )}
