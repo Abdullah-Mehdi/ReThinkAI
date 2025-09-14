@@ -18,18 +18,6 @@ html, body, .homepage {
   display: flex;
 }
 
-/* Questions layout - take up all the space with NO sidebar */
-.questions-layout {
-  display: block;
-  min-height: 100vh;
-}
-
-.questions-layout .right-col {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
 /* LEFT COLUMN */
 .left-col {
   height: 100vh;
@@ -460,7 +448,7 @@ html, body, .homepage {
   align-items: center;
   font-family: 'Open Sans', sans-serif;
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 6rem 2rem;
 }
 
 .results-page h1 {
@@ -545,6 +533,7 @@ html, body, .homepage {
   font-weight: 600;
   transition: all 0.3s ease;
   gap: 8px;
+  margin-bottom: 2rem;
 }
 
 .results-buttons .next-btn:hover {
@@ -560,6 +549,77 @@ html, body, .homepage {
 .results-link a {
   color: #667eea ;
   text-decoration: underline;
+}
+
+.scroll-down-hint {
+  margin-top: 2rem;
+  text-align: center;
+  animation: fadeIn 1s ease-in;
+  color: #555;
+}
+
+.scroll-down-hint p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.down-arrow {
+  font-size: 2rem;
+  animation: bounce 1.5s infinite;
+}
+
+/* Subtle bouncing arrow animation */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+.results-blurbs {
+  margin-top: 4rem;
+  margin-left: 8rem;
+  margin-right: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.blurb {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.blurb-left {
+  margin: 0.5rem;
+  text-align: left;
+}
+
+.blurb-right {
+  margin: 0.5rem;
+  text-align: left;
+}
+
+
+
+.blurb-image img {
+  padding: 2rem;
+  width: 100%;
+  /* border-radius: 12px; */
+}
+
+.citation {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
 }
 
 .mc-blank-overlay {
