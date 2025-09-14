@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Lottie from 'lottie-react'
 import './styles/App.css'
 import WaterBottleSlider from './components/WaterBottleSlider'
+import MultipleChoiceBlank from './components/MultipleChoiceBlank.jsx';
 
 import { FaArrowUp } from "react-icons/fa6";
 import { RiLoopLeftLine } from "react-icons/ri";
@@ -35,34 +36,39 @@ export default function OpenAIHome() {
       correctAnswer: 16 
     },
     3: {
-      type: 'placeholder',
-      text: 'Question 3 placeholder',
-      correctAnswer: 'placeholder',
-      component: null
+      type: 'multiple-choice-blank',
+      text: 'In 2023, they used _____ gallons of water for their data centers. Enough to water 41 golf courses annually.',
+      options: ['4 billion', '500 million', '6 billion', '700 million'],
+      correctAnswer: '6 billion', 
+      component: MultipleChoiceBlank
     },
     4: {
-      type: 'placeholder',
-      text: 'Question 4 placeholder',
-      correctAnswer: 'placeholder',
-      component: null
+      type: 'multiple-choice-blank',
+      text: 'Making a 2 kg computer requires _____ the amount of raw materials.',
+      options: ['100 times', '400 times', '600 times', '10000 times'],
+      correctAnswer: '400 times',
+      component: MultipleChoiceBlank
     },
     5: {
-      type: 'placeholder',
-      text: 'Question 5 placeholder',
-      correctAnswer: 'placeholder',
-      component: null
+      type: 'multiple-choice-blank',
+      text: 'In AI datacenters, a GPU’s lifespan averages to _____ .',
+      options: ['2-5 years', '1-3 years', '2-10 years', '1-7 years'],
+      correctAnswer: '1-3 years',
+      component: MultipleChoiceBlank
     },
     6: {
-      type: 'placeholder',
-      text: 'Question 6 placeholder',
-      correctAnswer: 'placeholder',
-      component: null
+      type: 'multiple-choice-blank',
+      text: 'By 2026, the yearly electricity consumption of data centers could power _____ American homes for a full year.',
+      options: ['11 million', '27 million', '54 million', '73 million'],
+      correctAnswer: '73 million',
+      component: MultipleChoiceBlank
     },
     7: {
-      type: 'placeholder',
-      text: 'Question 7 placeholder',
-      correctAnswer: 'placeholder',
-      component: null
+      type: 'multiple-choice-blank',
+      text: 'By 2026, global data centers will use electricity equal to _____ the annual electricity generation of the entire United States.',
+      options: ['6 times', '10 times', '17 times', '23 times'],
+      correctAnswer: '6 times',
+      component: MultipleChoiceBlank
     }
   };
 
@@ -299,91 +305,38 @@ export default function OpenAIHome() {
   }
 
 
- // Show questions page
-  if (currentPage === 'questions') {
-    const currentQ = questions[currentQuestion];
-    const imageOffset = -(currentQuestion - 1);
-    
-    // RENDER QUESTIONS PAGE (depending on question type...)
-    return (
-      <>
-      <div className="back-img-container">
-        <div 
-          className="moving-elements-wrapper"
-          style={{ transform: `translateX(calc(${imageOffset} * 100vw))` }}
-        >
-          <img
-            className="back-img"
-            src={backImg}
-            alt="Decorative background"
-          />
-          <div 
-            className="back-anim-offset-container"
-            // You can adjust the transform here to offset the animation
-            style={{ transform: 'translateX(-380px) translateY(0px)' }}
-          >
-            <Lottie 
-              className='back-anim' 
-              animationData={backAnim} 
-              loop 
-              autoplay 
-            />
-          </div>
-        </div>
-      </div>
-      <div className="questions-page">
-        <div className="questions-header">
-          <button className="back-home-btn" onClick={handleBackToHome}>
-            ← Home
-          </button>
-          <div className="progress-indicator">
-            Question {currentQuestion} of 7
-          </div>
-          <div className="score-display">
-            Score: {score} /  {Object.keys(answers).length}
-          </div>
-          {currentQuestion > 1 && (
-            <button className="prev-btn" onClick={handlePrevQuestion}>
-              ← Previous
-            </button>
-          )}
-        </div>
-
-        <div className="question-content">
-          {currentQ.type === 'fillblank-slider' && (
-            <FillBlankSlider 
-              questionData={currentQ} 
-              onAnswer={handleNextQuestion}
-            />
-          )}
-          
-          {currentQ.type === 'component' && currentQ.component && (
-            <div className="component-question">
-              <currentQ.component onAnswer={handleNextQuestion} />
-            </div>
-          )}
-
-          {currentQ.type === 'placeholder' && (
-            <div className="placeholder-question">
-              <h2>{currentQ.text}</h2>
-              <p>This question will be implemented later.</p>
-              <button 
-                className="next-btn"
-                onClick={() => handleNextQuestion('placeholder')}
-              >
-                {currentQuestion === 7 ? 'See Results' : 'Next Question'}
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-      </>
-    );
-  }
+ const currentQ = questions[currentQuestion];
+  const imageOffset = -(currentQuestion - 1);
+  const scaleFactor = window.innerHeight / 1080;
 
   // Show home page
   return (
     <div className="homepage">
+      {currentPage === 'questions' && (
+        <div className="back-img-container">
+          <div 
+            className="moving-elements-wrapper"
+            style={{ transform: `translateX(calc(${imageOffset} * (1920px * ${scaleFactor}) + (100vw - 1920px * ${scaleFactor}) / 2 + 150px))` }}
+          >
+            <img
+              className="back-img"
+              src={backImg}
+              alt="Decorative background"
+            />
+            <div 
+              className="back-anim-offset-container"
+              style={{ transform: 'translateX(-380px) translateY(0px)' }}
+            >
+              <Lottie 
+                className='back-anim' 
+                animationData={backAnim} 
+                loop 
+                autoplay 
+              />
+            </div>
+          </div>
+        </div>
+      )}
       {/* LEFT COLUMN */}
       <div className="left-col">
         <div className="logo">OpenAI</div>
@@ -403,26 +356,93 @@ export default function OpenAIHome() {
 
       {/* RIGHT COLUMN */}
       <div className="right-col">
-        <h1 className="prompt-title">What can I help with?</h1>
-        {isTyping && <TypingBubble />}
-        <div className="input-container">
-          <input
-            type="text"
-            placeholder="Type your question..."
-            className="prompt-input"
-            value={inputText}
-            onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
-          />
-          <button 
-            className="send-btn"
-            onClick={handleSendClick}
-            disabled={!inputText.trim()}
-          >
-            <FaArrowUp size={20} />
-          </button>
-        </div>
+        {currentPage === 'home' && (
+          <>
+            <h1 className="prompt-title">What can I help with?</h1>
+            <div className="input-container">
+              <input
+                type="text"
+                placeholder="Type your question..."
+                className="prompt-input"
+                value={inputText}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+              />
+              <div className='button-group'>
+                {isTyping && <TypingBubble />}
+                <button 
+                  className="send-btn"
+                  onClick={handleSendClick}
+                  disabled={!inputText.trim()}
+                >
+                  <FaArrowUp size={20} />
+                </button>
+              </div>
+            </div>
+          </>
+        )}
 
+        {currentPage === 'questions' && (
+          <div className="questions-page">
+            <div className="questions-header">
+              <div className="header-left">
+                <button className="back-home-btn" onClick={handleBackToHome}>
+                  ← Home
+                </button>
+              </div>
+              <div className="header-center">
+                <div className="progress-indicator">
+                  Question {currentQuestion} of 7
+                </div>
+                <div className="score-display">
+                  Score: {score} / {Object.keys(answers).length}
+                </div>
+              </div>
+              <div className="header-right">
+                {currentQuestion > 1 && (
+                  <button className="prev-btn" onClick={handlePrevQuestion}>
+                    ← Previous
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="question-content">
+              {currentQ.type === 'fillblank-slider' && (
+                <FillBlankSlider 
+                  questionData={currentQ} 
+                  onAnswer={handleNextQuestion}
+                />
+              )}
+              
+              {currentQ.type === 'component' && currentQ.component && (
+                <div className="component-question">
+                  <currentQ.component onAnswer={handleNextQuestion} />
+                </div>
+              )}
+
+              {currentQ.type === 'multiple-choice-blank' && currentQ.component && (
+                <currentQ.component 
+                  questionData={{...currentQ, isLast: currentQuestion === 7}}
+                  onAnswer={handleNextQuestion}
+                />
+              )}
+
+              {currentQ.type === 'placeholder' && (
+                <div className="placeholder-question">
+                  <h2>{currentQ.text}</h2>
+                  <p>This question will be implemented later.</p>
+                  <button 
+                    className="next-btn"
+                    onClick={() => handleNextQuestion('placeholder')}
+                  >
+                    {currentQuestion === 7 ? 'See Results' : 'Next Question'}
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
