@@ -345,10 +345,10 @@ export default function OpenAIHome() {
         <div className="left-text"> 
           <p className="tagline">Research</p>
           <p className="tagline">Safety</p>
-          <p className="tagline">For Business</p>
-          <p className="tagline">For Developers</p>
+          <p className="tagline">For People</p>
+          <p className="tagline">For You</p>
           <p className="tagline">ChatGPT</p>
-          <p className="tagline">Sora</p>
+          <p className="tagline">Data Centers</p>
           <p className="tagline">Stories</p>
           <p className="tagline">Company</p>
           <p className="tagline">News</p>
