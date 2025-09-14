@@ -256,99 +256,39 @@ export default function OpenAIHome() {
   }
 
 
- // Show questions page
-  if (currentPage === 'questions') {
-    const currentQ = questions[currentQuestion];
-    const imageOffset = -(currentQuestion - 1);
-    const scaleFactor = window.innerHeight / 1080;
-    
-    // RENDER QUESTIONS PAGE (depending on question type...)
-    return (
-      <>
-      <div className="back-img-container">
-        <div 
-          className="moving-elements-wrapper"
-          style={{ transform: `translateX(calc(${imageOffset} * (1920px * ${scaleFactor}) + (100vw - 1920px * ${scaleFactor}) / 2))` }}
-        >
-          <img
-            className="back-img"
-            src={backImg}
-            alt="Decorative background"
-          />
-          <div 
-            className="back-anim-offset-container"
-            // You can adjust the transform here to offset the animation
-            style={{ transform: 'translateX(-380px) translateY(0px)' }}
-          >
-            <Lottie 
-              className='back-anim' 
-              animationData={backAnim} 
-              loop 
-              autoplay 
-            />
-          </div>
-        </div>
-      </div>
-      <div className="questions-page">
-        <div className="questions-header">
-          <button className="back-home-btn" onClick={handleBackToHome}>
-            ← Home
-          </button>
-          <div className="progress-indicator">
-            Question {currentQuestion} of 7
-          </div>
-          <div className="score-display">
-            Score: {score} /  {Object.keys(answers).length}
-          </div>
-          {currentQuestion > 1 && (
-            <button className="prev-btn" onClick={handlePrevQuestion}>
-              ← Previous
-            </button>
-          )}
-        </div>
-
-        <div className="question-content">
-          {currentQ.type === 'fillblank-slider' && (
-            <FillBlankSlider 
-              questionData={currentQ} 
-              onAnswer={handleNextQuestion}
-            />
-          )}
-          
-          {currentQ.type === 'component' && currentQ.component && (
-            <div className="component-question">
-              <currentQ.component onAnswer={handleNextQuestion} />
-            </div>
-          )}
-
-          {currentQ.type === 'multiple-choice-blank' && currentQ.component && (
-            <currentQ.component 
-              questionData={{...currentQ, isLast: currentQuestion === 7}}
-              onAnswer={handleNextQuestion}
-            />
-          )}
-
-          {currentQ.type === 'placeholder' && (
-            <div className="placeholder-question">
-              <h2>{currentQ.text}</h2>
-              <p>This question will be implemented later.</p>
-              <button 
-                className="next-btn"
-                onClick={() => handleNextQuestion('placeholder')}
-              >
-                {currentQuestion === 7 ? 'See Results' : 'Next Question'}
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-      </>
-    );
-  }
+ const currentQ = questions[currentQuestion];
+  const imageOffset = -(currentQuestion - 1);
+  const scaleFactor = window.innerHeight / 1080;
 
   // Show home page
   return (
     <div className="homepage">
+      {currentPage === 'questions' && (
+        <div className="back-img-container">
+          <div 
+            className="moving-elements-wrapper"
+            style={{ transform: `translateX(calc(${imageOffset} * (1920px * ${scaleFactor}) + (100vw - 1920px * ${scaleFactor}) / 2 + 150px))` }}
+          >
+            <img
+              className="back-img"
+              src={backImg}
+              alt="Decorative background"
+            />
+            <div 
+              className="back-anim-offset-container"
+              // You can adjust the transform here to offset the animation
+              style={{ transform: 'translateX(-380px) translateY(0px)' }}
+            >
+              <Lottie 
+                className='back-anim' 
+                animationData={backAnim} 
+                loop 
+                autoplay 
+              />
+            </div>
+          </div>
+        </div>
+      )}
       {/* LEFT COLUMN */}
       <div className="left-col">
         <div className="logo">OpenAI</div>
@@ -368,26 +308,85 @@ export default function OpenAIHome() {
 
       {/* RIGHT COLUMN */}
       <div className="right-col">
-        <h1 className="prompt-title">What can I help with?</h1>
-        {isTyping && <TypingBubble />}
-        <div className="input-container">
-          <input
-            type="text"
-            placeholder="Type your question..."
-            className="prompt-input"
-            value={inputText}
-            onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
-          />
-          <button 
-            className="send-btn"
-            onClick={handleSendClick}
-            disabled={!inputText.trim()}
-          >
-            <FaArrowUp size={20} />
-          </button>
-        </div>
+        {currentPage === 'home' && (
+          <>
+            <h1 className="prompt-title">What can I help with?</h1>
+            {isTyping && <TypingBubble />}
+            <div className="input-container">
+              <input
+                type="text"
+                placeholder="Type your question..."
+                className="prompt-input"
+                value={inputText}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+              />
+              <button 
+                className="send-btn"
+                onClick={handleSendClick}
+                disabled={!inputText.trim()}
+              >
+                <FaArrowUp size={20} />
+              </button>
+            </div>
+          </>
+        )}
 
+        {currentPage === 'questions' && (
+          <div className="questions-page">
+            <div className="questions-header">
+              <button className="back-home-btn" onClick={handleBackToHome}>
+                ← Home
+              </button>
+              <div className="progress-indicator">
+                Question {currentQuestion} of 7
+              </div>
+              <div className="score-display">
+                Score: {score} /  {Object.keys(answers).length}
+              </div>
+              {currentQuestion > 1 && (
+                <button className="prev-btn" onClick={handlePrevQuestion}>
+                  ← Previous
+                </button>
+              )}
+            </div>
+
+            <div className="question-content">
+              {currentQ.type === 'fillblank-slider' && (
+                <FillBlankSlider 
+                  questionData={currentQ} 
+                  onAnswer={handleNextQuestion}
+                />
+              )}
+              
+              {currentQ.type === 'component' && currentQ.component && (
+                <div className="component-question">
+                  <currentQ.component onAnswer={handleNextQuestion} />
+                </div>
+              )}
+
+              {currentQ.type === 'multiple-choice-blank' && currentQ.component && (
+                <currentQ.component 
+                  questionData={{...currentQ, isLast: currentQuestion === 7}}
+                  onAnswer={handleNextQuestion}
+                />
+              )}
+
+              {currentQ.type === 'placeholder' && (
+                <div className="placeholder-question">
+                  <h2>{currentQ.text}</h2>
+                  <p>This question will be implemented later.</p>
+                  <button 
+                    className="next-btn"
+                    onClick={() => handleNextQuestion('placeholder')}
+                  >
+                    {currentQuestion === 7 ? 'See Results' : 'Next Question'}
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

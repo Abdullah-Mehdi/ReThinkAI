@@ -21,13 +21,13 @@ html, body, .homepage {
 /* LEFT COLUMN */
 .left-col {
   height: 100vh;
-  width: 20%;
-  min-width: 240px;
+  width: 300px;
   background: #ffffff;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   /* border-right: 1px solid #1f1f1f; */
+  z-index: 1;
 }
 
 .logo {
