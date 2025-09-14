@@ -3,8 +3,19 @@ import './styles/App.css'
 import WaterBottleSlider from './components/WaterBottleSlider'
 
 import { FaArrowUp } from "react-icons/fa6";
+import TypingBubble from './components/TypingBubble.jsx';
 
 export default function OpenAIHome() {
+  const [isTyping, setIsTyping] = useState(false);
+
+  const handleSend = () => {
+    setIsTyping(true);
+
+    setTimeout(() => {
+      setIsTyping(false);
+    }, 3000);
+  }
+
   const [currentPage, setCurrentPage] = useState('home'); // 'home' or 'questions' will be the two pages (FOR NOW)
   const [inputText, setInputText] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(1); // Track which question (1-7)
@@ -232,6 +243,7 @@ export default function OpenAIHome() {
       {/* RIGHT COLUMN */}
       <div className="right-col">
         <h1 className="prompt-title">What can I help with?</h1>
+        {isTyping && <TypingBubble />}
         <div className="input-container">
           <input
             type="text"
@@ -249,6 +261,7 @@ export default function OpenAIHome() {
             <FaArrowUp size={20} />
           </button>
         </div>
+
       </div>
     </div>
   );
