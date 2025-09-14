@@ -57,16 +57,18 @@ export default function OpenAIHome() {
       component: MultipleChoiceBlank
     },
     6: {
-      type: 'placeholder',
-      text: 'Question 6 placeholder',
-      correctAnswer: 'placeholder',
-      component: null
+      type: 'multiple-choice-blank',
+      text: 'By 2026, the yearly electricity consumption of data centers could power _____ American homes for a full year.',
+      options: ['11 million', '27 million', '54 million', '73 million'],
+      correctAnswer: '73 million',
+      component: MultipleChoiceBlank
     },
     7: {
-      type: 'placeholder',
-      text: 'Question 7 placeholder',
-      correctAnswer: 'placeholder',
-      component: null
+      type: 'multiple-choice-blank',
+      text: 'By 2026, global data centers will use electricity equal to _____ the annual electricity generation of the entire United States.',
+      options: ['6 times', '10 times', '17 times', '23 times'],
+      correctAnswer: '6 times',
+      component: MultipleChoiceBlank
     }
   };
 
