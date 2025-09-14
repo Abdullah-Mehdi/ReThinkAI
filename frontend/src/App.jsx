@@ -6,6 +6,7 @@ import WaterBottleSlider from './components/WaterBottleSlider'
 import { FaArrowUp } from "react-icons/fa6";
 import TypingBubble from './components/TypingBubble.jsx';
 import backImg from './assets/backdrop.svg'
+import backAnim from './assets/animatedElements.json'
 
 export default function OpenAIHome() {
   const [isTyping, setIsTyping] = useState(false);
@@ -187,12 +188,28 @@ export default function OpenAIHome() {
     return (
       <>
         <div className="back-img-container">
-          <img
-            className="back-img"
-            src={backImg}
+          <div 
+            className="moving-elements-wrapper"
             style={{ transform: `translateX(calc(${imageOffset} * 100vw))` }}
-            alt="Decorative background"
-          />
+          >
+            <img
+              className="back-img"
+              src={backImg}
+              alt="Decorative background"
+            />
+            <div 
+              className="back-anim-offset-container"
+              // You can adjust the transform here to offset the animation
+              style={{ transform: 'translateX(-380px) translateY(0px)' }}
+            >
+              <Lottie 
+                className='back-anim' 
+                animationData={backAnim} 
+                loop 
+                autoplay 
+              />
+            </div>
+          </div>
         </div>
         <div className="questions-page">
           <div className="questions-header">

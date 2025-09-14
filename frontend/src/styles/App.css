@@ -372,8 +372,29 @@ html, body, .homepage {
   z-index: 0;
 }
 
+.moving-elements-wrapper {
+  position: relative;
+  height: 100%;
+  width: max-content;
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+}
+
 .back-img {
   height: 100%;
   width: auto;
-  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  display: block;
+}
+
+.back-anim-offset-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.back-anim {
+  width: 100%;
+  height: 100%;
 }
