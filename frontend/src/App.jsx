@@ -7,15 +7,6 @@ import TypingBubble from './components/TypingBubble.jsx';
 
 export default function OpenAIHome() {
   const [isTyping, setIsTyping] = useState(false);
-
-  const handleSend = () => {
-    setIsTyping(true);
-
-    setTimeout(() => {
-      setIsTyping(false);
-    }, 3000);
-  }
-
   const [currentPage, setCurrentPage] = useState('home'); // 'home' or 'questions' will be the two pages (FOR NOW)
   const [inputText, setInputText] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(1); // Track which question (1-7)
@@ -65,8 +56,15 @@ export default function OpenAIHome() {
   // SO when we click send with text, we go to questions page yippie!!
   const handleSendClick = () => {
     if (inputText.trim()) {
-      setCurrentPage('questions');
-      setCurrentQuestion(1);
+      // Show typing bubble first
+      setIsTyping(true);
+      
+      // After 3 seconds, hide typing bubble and navigate to questions
+      setTimeout(() => {
+        setIsTyping(false);
+        setCurrentPage('questions');
+        setCurrentQuestion(1);
+      }, 3000);
     }
   };
 
