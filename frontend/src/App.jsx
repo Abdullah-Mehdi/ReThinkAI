@@ -199,56 +199,55 @@ export default function OpenAIHome() {
       <p>That's better than {percentageBetter}% of other users!!!</p>
 
       {/* Simple bar chart with Y axis */}
-<div className="bar-chart-container">
-  {/* Y axis labels */}
-  <div className="y-axis">
-    {[60, 50, 40, 30, 20, 10, 0].map((percent) => (
-      <div key={percent} className="y-label">
-        {percent}%
-      </div>
-    ))}
-  </div>
-
-  {/* Bars */}
-  <div className="bar-chart">
-    {[
-      { score: 0, height: 20 },
-      { score: 1, height: 10 },
-      { score: 2, height: 30 },
-      { score: 3, height: 60 },
-      { score: 4, height: 110 },
-      { score: 5, height: 30},
-      { score: 6, height: 20 },
-      { score: 7, height: 10 },
-    ].map(({ score, height }) => (
-      <div key={score} className="bar">
-        <div 
-          className="bar-fill" 
-          style={{ height: `${height}px` }}
-        />
-        <span className="bar-label">{score}</span>
-      </div>
-    ))}
-  </div>
-</div>
-
-
-      {/* Row of buttons */}
-      <div className="results-buttons">
-        <button className="next-btn" onClick={handleBackToHome}>Go Home</button>
-        <button className="next-btn" onClick={handleRetake}>Retake Quiz  <RiLoopLeftLine size={20} /></button>
+      <div className="bar-chart-container">
+        {/* Y axis labels */}
+        <div className="y-axis">
+          {[60, 50, 40, 30, 20, 10, 0].map((percent) => (
+            <div key={percent} className="y-label">
+              {percent}%
+            </div>
+          ))}
       </div>
 
-      {/* Link text to Google Doc */}
-      <p className="results-link">
-        Read more about our <a href="https://docs.google.com/document/d/1TlMySydvNZwFaaoJoEQJum9m1lcZqLHacZ5_J1k9PUI/edit?usp=sharing" target="_blank" rel="noopener noreferrer">sources</a> here.
-      </p>
+      {/* Bars */}
+      <div className="bar-chart">
+        {[
+          { score: 0, height: 20 },
+          { score: 1, height: 10 },
+          { score: 2, height: 30 },
+          { score: 3, height: 60 },
+          { score: 4, height: 110 },
+          { score: 5, height: 30},
+          { score: 6, height: 20 },
+          { score: 7, height: 10 },
+        ].map(({ score, height }) => (
+          <div key={score} className="bar">
+            <div 
+              className="bar-fill" 
+              style={{ height: `${height}px` }}
+            />
+            <span className="bar-label">{score}</span>
+          </div>
+        ))}
+      </div>
     </div>
-  );
-}
+
+    {/* Row of buttons */}
+    <div className="results-buttons">
+      <button className="next-btn" onClick={handleBackToHome}>Go Home</button>
+      <button className="next-btn" onClick={handleRetake}>Retake Quiz  <RiLoopLeftLine size={20} /></button>
+    </div>
+
+    {/* Link text to Google Doc */}
+    <p className="results-link">
+      Read more about our <a href="https://docs.google.com/document/d/1TlMySydvNZwFaaoJoEQJum9m1lcZqLHacZ5_J1k9PUI/edit?usp=sharing" target="_blank" rel="noopener noreferrer">sources</a> here.
+    </p>
+  </div>
+    );
+  }
 
 
-  // Show questions page
+ // Show questions page
   if (currentPage === 'questions') {
     const currentQ = questions[currentQuestion];
     const imageOffset = -(currentQuestion - 1);
@@ -256,40 +255,60 @@ export default function OpenAIHome() {
     // RENDER QUESTIONS PAGE (depending on question type...)
     return (
       <>
-        <div className="back-img-container">
+      <div className="back-img-container">
+        <div 
+          className="moving-elements-wrapper"
+          style={{ transform: `translateX(calc(${imageOffset} * 100vw))` }}
+        >
+          <img
+            className="back-img"
+            src={backImg}
+            alt="Decorative background"
+          />
           <div 
-            className="moving-elements-wrapper"
-            style={{ transform: `translateX(calc(${imageOffset} * 100vw))` }}
+            className="back-anim-offset-container"
+            // You can adjust the transform here to offset the animation
+            style={{ transform: 'translateX(-380px) translateY(0px)' }}
           >
-            <img
-              className="back-img"
-              src={backImg}
-              alt="Decorative background"
+            <Lottie 
+              className='back-anim' 
+              animationData={backAnim} 
+              loop 
+              autoplay 
             />
-            <div 
-              className="back-anim-offset-container"
-              // You can adjust the transform here to offset the animation
-              style={{ transform: 'translateX(-380px) translateY(0px)' }}
-            >
-              <Lottie 
-                className='back-anim' 
-                animationData={backAnim} 
-                loop 
-                autoplay 
-              />
-            </div>
           </div>
         </div>
-        <div className="questions-page">
-          <div className="questions-header">
-            <button className="back-home-btn" onClick={handleBackToHome}>
-              ← Home
+      </div>
+      <div className="questions-page">
+        <div className="questions-header">
+          <button className="back-home-btn" onClick={handleBackToHome}>
+            ← Home
+          </button>
+          <div className="progress-indicator">
+            Question {currentQuestion} of 7
+          </div>
+          <div className="score-display">
+            Score: {score} / {currentQuestion - 1}
+          </div>
+          {currentQuestion > 1 && (
+            <button className="prev-btn" onClick={handlePrevQuestion}>
+              ← Previous
             </button>
-            <div className="progress-indicator">
-              Question {currentQuestion} of 7
+          )}
+        </div>
+
+        <div className="question-content">
+          {currentQ.type === 'fillblank-slider' && (
+            <FillBlankSlider 
+              questionData={currentQ} 
+              onAnswer={handleNextQuestion}
+            />
+          )}
+          
+          {currentQ.type === 'component' && currentQ.component && (
+            <div className="component-question">
+              <currentQ.component onAnswer={handleNextQuestion} />
             </div>
-            <div className="score-display">
-              Score: {score} / {currentQuestion - 1}
           )}
 
           {currentQ.type === 'placeholder' && (
@@ -303,41 +322,9 @@ export default function OpenAIHome() {
                 {currentQuestion === 7 ? 'See Results' : 'Next Question'}
               </button>
             </div>
-            {currentQuestion > 1 && (
-              <button className="prev-btn" onClick={handlePrevQuestion}>
-                ← Previous
-              </button>
-            )}
-          </div>
-
-          <div className="question-content">
-            {currentQ.type === 'fillblank-slider' && (
-              <FillBlankSlider 
-                questionData={currentQ} 
-                onAnswer={handleNextQuestion}
-              />
-            )}
-            
-            {currentQ.type === 'component' && currentQ.component && (
-              <div className="component-question">
-                <currentQ.component onAnswer={handleNextQuestion} />
-              </div>
-            )}
-
-            {currentQ.type === 'placeholder' && (
-              <div className="placeholder-question">
-                <h2>{currentQ.text}</h2>
-                <p>This question will be implemented later.</p>
-                <button 
-                  className="next-btn"
-                  onClick={() => handleNextQuestion('placeholder')}
-                >
-                  Next Question
-                </button>
-              </div>
-            )}
-          </div>
+          )}
         </div>
+      </div>
       </>
     );
   }
