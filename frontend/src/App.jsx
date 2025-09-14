@@ -10,9 +10,15 @@ export default function OpenAIHome() {
       <div className="left-col">
         <div className="logo">OpenAI</div>
         <div className="left-text"> 
-          <p className="tagline"> AAAAAA</p>
-          <p className="tagline"> BBBBBBB</p>
-          <p className="tagline"> CCCCCCCC</p>
+          <p className="tagline">Research</p>
+          <p className="tagline">Safety</p>
+          <p className="tagline">For Business</p>
+          <p className="tagline">For Developers</p>
+          <p className="tagline">ChatGPT</p>
+          <p className="tagline">Sora</p>
+          <p className="tagline">Stories</p>
+          <p className="tagline">Company</p>
+          <p className="tagline">News</p>
         </div>
         
       </div>
